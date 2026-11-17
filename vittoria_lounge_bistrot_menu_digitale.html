@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="it" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>VITTORIA — Lounge &amp; Bistrot | Menu Digitale</title>
+    
+    <!-- Google Fonts: Cinzel & Cormorant Garamond per titoli luxury, Plus Jakarta Sans per leggibilità -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#1a130e',
+                        charcoal: '#231a13',
+                        card: '#231a13',
+                        cardHover: '#2b2017',
+                        gold: {
+                            DEFAULT: '#d4af37',
+                            light: '#e6c65b',
+                            bright: '#e0be53',
+                            dark: '#c59b27',
+                            muted: 'rgba(212, 175, 55, 0.24)'
+                        },
+                        ivory: '#faf6f0',
+                        warmgrey: '#c4b5a5'
+                    },
+                    fontFamily: {
+                        cinzel: ['Cinzel', 'serif'],
+                        serif: ['Cormorant Garamond', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #1a130e;
+            color: #faf6f0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            overflow-x: hidden;
+        }
+
+        /* Bagliore dorato e marrone caldo radiale sullo sfondo della cover */
+        .cover-glow {
+            background: radial-gradient(circle at 50% 35%, rgba(224, 190, 83, 0.16) 0%, rgba(40, 29, 21, 0.65) 45%, rgba(26, 19, 14, 1) 85%);
+        }
+
+        /* Effetto pulse sul pulsante principale */
+        @keyframes subtlePulse {
+            0%, 100% { box-shadow: 0 0 22px rgba(224, 190, 83, 0.28); }
+            50% { box-shadow: 0 0 34px rgba(224, 190, 83, 0.48); }
+        }
+        .cta-glow {
+            animation: subtlePulse 3.5s infinite ease-in-out;
+        }
+
+        /* Nascondi scrollbar orizzontale mantenendo scorrimento fluido */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Transizioni fluide tra Cover e Menu */
+        .view-transition {
+            transition: opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1), transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        /* Effetto vetro satinato marrone espresso per barra sticky */
+        .glass-header {
+            background: rgba(26, 19, 14, 0.92);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+
+        /* Animazione comparsa card */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-up {
+            animation: fadeUp 0.28s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="bg-obsidian text-ivory antialiased selection:bg-gold selection:text-obsidian">
+
+    <!-- ===================================================================== -->
+    <!-- 1. PAGINA INIZIALE (COVER SCREEN) - SEMPRE VISIBILE ALL'APERTURA      -->
+    <!-- ===================================================================== -->
+    <section id="cover-view" class="view-transition min-h-[100dvh] w-full flex items-center justify-center p-3 sm:p-6 relative overflow-hidden cover-glow">
+        
+        <!-- Cornice esterna sottile dorata su sfondo marrone espresso -->
+        <div class="w-full max-w-md min-h-[calc(100dvh-1.5rem)] sm:min-h-[690px] rounded-[28px] border border-gold/40 p-2 flex flex-col justify-between relative bg-gradient-to-b from-[#281d15]/95 via-[#211811]/95 to-[#1a130e] shadow-2xl">
+            
+            <!-- Cornice interna concentrica luxury -->
+            <div class="w-full h-full flex-1 rounded-[22px] border border-gold/25 px-5 py-7 sm:px-8 sm:py-9 flex flex-col items-center justify-between text-center relative">
+                
+                <!-- Badge superiore BENVENUTI con corona dorata luxury -->
+                <div class="mt-1">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold/45 bg-gold/10 text-gold-bright text-xs font-semibold tracking-[0.22em] uppercase shadow-[0_0_15px_rgba(212,175,55,0.14)]">
+                        <svg class="w-4 h-4 text-gold-bright" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 17L5 8L9.5 12L12 6L14.5 12L19 8L21 17H3Z"/>
+                            <path d="M4 20H20"/>
+                            <circle cx="12" cy="4" r="1" fill="currentColor"/>
+                            <circle cx="5" cy="6.5" r="0.8" fill="currentColor"/>
+                            <circle cx="19" cy="6.5" r="0.8" fill="currentColor"/>
+                        </svg>
+                        <span>Benvenuti</span>
+                    </div>
+                </div>
+
+                <!-- Blocco Centrale: Emblema Ufficiale VITTORIA + Titolo + Sottotitolo + Descrizione -->
+                <div class="flex flex-col items-center my-auto py-3 w-full">
+                    
+                    <!-- Emblema circolare con scudo pentagonale arrotondato e V intrecciata -->
+                    <div class="w-28 h-28 sm:w-32 sm:h-32 rounded-full border border-gold/40 bg-gradient-to-b from-[#2b2017] to-[#1a130e] flex items-center justify-center mb-5 shadow-[0_0_32px_rgba(212,175,55,0.2)] relative">
+                        <div class="w-[88%] h-[88%] rounded-full border border-gold/25 flex items-center justify-center">
+                            <svg class="w-16 h-16 sm:w-20 sm:h-20" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Logo Vittoria">
+                                <!-- Scudo pentagonale arrotondato ufficiale -->
+                                <path d="M60 12 L94 21 C97 22 99 24 100 27 L106 59 C107 62 106 65 105 68 L91 96 C89 99 87 101 84 102 L62 108 C61 108.4 59 108.4 58 108 L36 102 C33 101 31 99 29 96 L15 68 C14 65 13 62 14 59 L20 27 C21 24 23 22 26 21 L60 12 Z" stroke="#E0BE53" stroke-width="2.4" stroke-linejoin="round"/>
+                                <!-- Lettera V serif classica bianca -->
+                                <path d="M35 37 H51 V40.5 H46.5 L60.5 76 L73.5 40.5 H68.5 V37 H82.5 V40.5 H78 L60.5 86 H57.5 L39.5 40.5 H35 V37 Z" fill="#FAF6F0"/>
+                                <!-- Svolazzo calligrafico bianco intrecciato alla V -->
+                                <path d="M35 64 C46 53 64 46 78 48 C89 49.5 94 56 91 63 C88.5 68.5 79 70 70 64.5 C61 59 54 50 49 42" stroke="#FAF6F0" stroke-width="2.7" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Titolo Principale VITTORIA -->
+                    <h1 class="font-cinzel text-4xl sm:text-5xl font-semibold tracking-[0.24em] text-ivory pl-[0.24em] drop-shadow-sm">
+                        VITTORIA
+                    </h1>
+
+                    <!-- Sottotitolo LOUNGE & BISTROT tra due linee dorate -->
+                    <div class="flex items-center justify-center gap-3 w-full max-w-[295px] my-3">
+                        <span class="h-[1px] flex-1 bg-gradient-to-r from-transparent to-gold/70"></span>
+                        <span class="font-serif italic text-base sm:text-lg tracking-[0.2em] text-gold-bright uppercase whitespace-nowrap">
+                            Lounge &amp; Bistrot
+                        </span>
+                        <span class="h-[1px] flex-1 bg-gradient-to-l from-transparent to-gold/70"></span>
+                    </div>
+
+                    <!-- Descrizione breve elegante -->
+                    <p class="text-warmgrey text-xs sm:text-sm leading-relaxed max-w-[300px] mt-1 font-light">
+                        Caffetteria artigianale, sfizioserie gourmet, signature drink e selezioni ricercate per ogni momento della giornata.
+                    </p>
+                </div>
+
+                <!-- Pulsante Principale CTA + Footer Social -->
+                <div class="w-full space-y-5 mb-1">
+                    <button 
+                        id="open-menu-btn"
+                        onclick="openMenu()"
+                        class="cta-glow w-full py-4 px-6 rounded-full bg-gold-bright hover:bg-gold-light active:scale-[0.98] text-obsidian font-bold text-xs sm:text-sm tracking-[0.18em] uppercase transition-all duration-200 flex items-center justify-center gap-2.5 cursor-pointer shadow-lg"
+                    >
+                        <span>Sfoglia il Menu</span>
+                        <svg class="w-4 h-4 stroke-[2.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
+                        </svg>
+                    </button>
+
+                    <!-- Social Media Footer -->
+                    <div class="pt-1 border-t border-gold/15">
+                        <p class="text-[10px] font-semibold tracking-[0.24em] text-gold-bright uppercase mb-2">
+                            Seguiteci
+                        </p>
+                        <div class="flex items-center justify-center gap-3 text-[11px] sm:text-xs text-ivory/85 flex-wrap">
+                            <button onclick="copySocial('@vittoria_ucicinemas')" class="inline-flex items-center gap-1.5 hover:text-gold-bright transition-colors cursor-pointer">
+                                <svg class="w-3.5 h-3.5 text-gold-bright" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                                </svg>
+                                <span>@vittoria_ucicinemas</span>
+                            </button>
+                            <span class="text-warmgrey/40">•</span>
+                            <button onclick="copySocial('@vittoria_ucicinemas')" class="inline-flex items-center gap-1.5 hover:text-gold-bright transition-colors cursor-pointer">
+                                <svg class="w-3.5 h-3.5 text-gold-bright" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>
+                                </svg>
+                                <span>@vittoria_ucicinemas</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- 2. SECONDA PAGINA: MENU DIGITALE INTERATTIVO (Nascosto all'avvio)     -->
+    <!-- ===================================================================== -->
+    <main id="menu-view" style="display: none;" class="view-transition opacity-0 min-h-[100dvh] w-full max-w-2xl mx-auto pb-16">
+        
+        <!-- Header del Menu con Logo Completo Curvo/Concavo CAFFETTERIA VITTORIA BISTROT & LOUNGE -->
+        <header class="pt-4 pb-3 px-4 bg-gradient-to-b from-[#281d15] to-obsidian border-b border-gold/20">
+            
+            <!-- Barra superiore pulita con tasto di ritorno alla Cover -->
+            <div class="flex items-center justify-between gap-2 mb-3">
+                <button onclick="closeMenu()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-card border border-gold/25 hover:border-gold/60 text-xs font-medium text-ivory transition-colors cursor-pointer shrink-0">
+                    <svg class="w-3.5 h-3.5 text-gold-bright" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                    <span>Cover</span>
+                </button>
+            </div>
+
+            <!-- Marchio Completo Vettoriale con EFFETTO LENTE CONCAVA e lettera "A" proporzionata e sottile come la "V" -->
+            <div class="w-full max-w-[345px] mx-auto mb-3">
+                <svg class="w-full h-auto block mx-auto" viewBox="0 0 480 156" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Caffetteria Vittoria Bistrot & Lounge">
+                    <!-- Cornice poligonale con inclinazione prospettica concava e angoli smussati -->
+                    <path d="M138 24 L26 15 L18 23 V133 L26 141 L102 132" stroke="#E0BE53" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M342 24 L454 15 L462 23 V133 L454 141 L378 132" stroke="#E0BE53" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+
+                    <!-- Scritta superiore: CAFFETTERIA -->
+                    <text x="240" y="30" text-anchor="middle" fill="#E0BE53" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="16.5" letter-spacing="4.2">
+                        CAFFETTERIA
+                    </text>
+
+                    <!-- Parola "VITTORIA" con effetto curvo/concavo: V e A esterne con lo stesso identico spessore e grazie sottili -->
+                    <g fill="#FAF6F0" font-family="'Cinzel', serif" font-weight="600" text-anchor="middle">
+                        <!-- V iniziale elegante -->
+                        <text x="64" y="78" dominant-baseline="central" font-size="68" transform="translate(64,78) scale(1.0, 1.08) translate(-64,-78)">V</text>
+                        <!-- I -->
+                        <text x="115" y="78" dominant-baseline="central" font-size="55" transform="translate(115,78) scale(0.96, 0.95) translate(-115,-78)">I</text>
+                        <!-- T -->
+                        <text x="156" y="78" dominant-baseline="central" font-size="48" transform="translate(156,78) scale(0.94, 0.88) translate(-156,-78)">T</text>
+                        <!-- T centrale -->
+                        <text x="203" y="78" dominant-baseline="central" font-size="43" transform="translate(203,78) scale(0.92, 0.84) translate(-203,-78)">T</text>
+                        <!-- O centrale -->
+                        <text x="253" y="78" dominant-baseline="central" font-size="43" transform="translate(253,78) scale(0.94, 0.84) translate(-253,-78)">O</text>
+                        <!-- R -->
+                        <text x="306" y="78" dominant-baseline="central" font-size="50" transform="translate(306,78) scale(0.96, 0.90) translate(-306,-78)">R</text>
+                        <!-- I -->
+                        <text x="351" y="78" dominant-baseline="central" font-size="56" transform="translate(351,78) scale(0.98, 0.97) translate(-351,-78)">I</text>
+                        <!-- A finale: stesso identico carattere Cinzel, stesso spessore e grazie sottili della V -->
+                        <text x="405" y="78" dominant-baseline="central" font-size="68" transform="translate(405,78) scale(1.0, 1.08) translate(-405,-78)">A</text>
+                    </g>
+
+                    <!-- Svolazzo calligrafico intrecciato alla A e simbolo ® in alto a destra -->
+                    <g transform="translate(373, 40)">
+                        <path d="M2 53 C15 43 34 36 49 38 C61 39 67 45 66 52 C65 58 55 61 45 56 C35 51 27 43 22 36" stroke="#FAF6F0" stroke-width="2.1" stroke-linecap="round"/>
+                        <circle cx="65" cy="9" r="6" stroke="#E0BE53" stroke-width="1.3"/>
+                        <text x="65" y="12" text-anchor="middle" fill="#E0BE53" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="8">R</text>
+                    </g>
+
+                    <!-- Scritta inferiore: BISTROT & LOUNGE -->
+                    <text x="240" y="138" text-anchor="middle" fill="#E0BE53" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="15.5" letter-spacing="3.6">
+                        BISTROT &amp; LOUNGE
+                    </text>
+                </svg>
+            </div>
+
+            <!-- Barra Social compatta -->
+            <div class="rounded-2xl bg-card/90 border border-gold/20 py-2 px-3 flex flex-col items-center justify-center gap-1">
+                <span class="text-[10px] font-bold tracking-[0.22em] text-gold-bright uppercase">Seguiteci</span>
+                <div class="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[11px] sm:text-xs text-ivory/90">
+                    <button onclick="copySocial('@vittoria_ucicinemas')" class="inline-flex items-center gap-1 hover:text-gold-bright transition-colors cursor-pointer">
+                        <svg class="w-3.5 h-3.5 text-gold-bright shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                        <span>@vittoria_ucicinemas</span>
+                    </button>
+                    <span class="text-warmgrey/40">•</span>
+                    <button onclick="copySocial('@vittoria_ucicinemas')" class="inline-flex items-center gap-1 hover:text-gold-bright transition-colors cursor-pointer">
+                        <svg class="w-3.5 h-3.5 text-gold-bright shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>
+                        </svg>
+                        <span>@vittoria_ucicinemas</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Barra Sticky: Ricerca + Filtri Rapidi + Categorie Orizzontali -->
+        <div class="sticky top-0 z-30 glass-header border-b border-gold/15 pt-2.5 pb-3 px-4 space-y-2.5 shadow-lg">
+            
+            <!-- Barra di Ricerca -->
+            <div class="relative">
+                <div class="absolute inset-y-0 left-3.5 flex items-center pointer-events-none">
+                    <svg class="w-4 h-4 text-warmgrey" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </div>
+                <input 
+                    type="text" 
+                    id="search-input" 
+                    oninput="handleSearch(this.value)"
+                    placeholder="Cerca piatto, drink o ingrediente..." 
+                    class="w-full bg-card border border-gold/25 focus:border-gold/70 rounded-xl py-2.5 pl-10 pr-9 text-sm text-ivory placeholder-warmgrey/75 outline-none transition-colors"
+                >
+                <button id="clear-search-btn" onclick="clearSearch()" class="hidden absolute inset-y-0 right-2.5 flex items-center px-1.5 text-warmgrey hover:text-ivory cursor-pointer">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Filtri Rapidi a Pillola -->
+            <div id="dietary-filters" class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-0.5">
+                <button data-filter="all" onclick="setDietaryFilter('all')" class="diet-pill active shrink-0 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer bg-gold-bright text-obsidian shadow-sm">
+                    Tutti
+                </button>
+                <button data-filter="recommended" onclick="setDietaryFilter('recommended')" class="diet-pill shrink-0 px-3.5 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer bg-card text-ivory/90 border border-gold/20 hover:border-gold/50 flex items-center gap-1.5">
+                    <span class="text-gold-bright">☆</span> Consigliati
+                </button>
+                <button data-filter="vegan" onclick="setDietaryFilter('vegan')" class="diet-pill shrink-0 px-3.5 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer bg-card text-ivory/90 border border-gold/20 hover:border-gold/50 flex items-center gap-1.5">
+                    <span class="text-emerald-400">🌿</span> Vegano
+                </button>
+                <button data-filter="nonalcoholic" onclick="setDietaryFilter('nonalcoholic')" class="diet-pill shrink-0 px-3.5 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer bg-card text-ivory/90 border border-gold/20 hover:border-gold/50 flex items-center gap-1.5">
+                    <span class="text-sky-400">✨</span> Analcolico
+                </button>
+            </div>
+
+            <!-- Categorie Orizzontali Scorrevoli -->
+            <div id="category-tabs" class="flex items-center gap-2 overflow-x-auto no-scrollbar pt-0.5">
+                <!-- Popolato dinamicamente via JavaScript -->
+            </div>
+        </div>
+
+        <!-- Contenitore Sezioni del Menù -->
+        <div id="menu-content" class="px-4 pt-5 space-y-8">
+            <!-- Popolato dinamicamente via JavaScript -->
+        </div>
+
+        <!-- Messaggio Nessun Risultato -->
+        <div id="empty-state" class="hidden px-6 py-16 text-center">
+            <div class="w-14 h-14 rounded-full bg-card border border-gold/25 flex items-center justify-center mx-auto mb-4 text-gold-bright">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+            </div>
+            <h3 class="font-serif text-2xl text-ivory mb-1">Nessun articolo trovato</h3>
+            <p class="text-sm text-warmgrey mb-5">Prova a cercare un altro ingrediente o reimposta i filtri selezionati.</p>
+            <button onclick="resetAllFilters()" class="px-5 py-2.5 rounded-xl bg-gold-bright text-obsidian text-xs font-bold uppercase tracking-wider cursor-pointer">
+                Mostra tutto il menù
+            </button>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-14 px-4 pt-6 border-t border-gold/15 text-center space-y-2">
+            <p class="font-cinzel text-sm tracking-[0.2em] text-gold-bright">VITTORIA — LOUNGE &amp; BISTROT</p>
+            <p class="text-xs text-warmgrey max-w-sm mx-auto leading-relaxed">
+                Gentile Cliente, per qualsiasi informazione su allergeni o intolleranze alimentari ti invitiamo a rivolgerti al nostro personale di sala.
+            </p>
+        </footer>
+    </main>
+
+    <!-- Toast di notifica elegante -->
+    <div id="toast-notification" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 transition-opacity duration-300">
+        <div class="px-4 py-2 rounded-full bg-card border border-gold/50 text-xs font-medium text-ivory shadow-xl flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-gold-bright"></span>
+            <span id="toast-message">Copiato negli appunti</span>
+        </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- JAVASCRIPT: DATI COMPLETI CORRETTI E LOGICA INTERATTIVA               -->
+    <!-- ===================================================================== -->
+    <script>
+        /**
+         * DATABASE COMPLETO DEL MENÙ DI VITTORIA - LOUNGE & BISTROT
+         * - Tutti i prezzi sono mantenuti 100% invariati rispetto al file originale.
+         * - Ortografia revisionata e corretta.
+         */
+        const MENU_CATEGORIES = [
+            {
+                id: 'caffetteria',
+                name: 'Caffetteria',
+                icon: '☕',
+                subtitle: 'Miscele selezionate e specialità golose',
+                items: [
+                    { name: 'Caffè Espresso', price: '€ 2,00', numericPrice: 2.00 },
+                    { name: 'Caffè con Panna', price: '€ 3,50', numericPrice: 3.50 },
+                    { name: 'Caffè Deca', desc: 'Decaffeinato', price: '€ 2,50', numericPrice: 2.50 },
+                    { name: 'Caffè Americano', price: '€ 3,00', numericPrice: 3.00 },
+                    { name: 'Caffè Freddo', price: '€ 2,50', numericPrice: 2.50 },
+                    { name: 'Caffè al Ginseng', price: '€ 2,50', numericPrice: 2.50 },
+                    { name: "Caffè d'Orzo", price: '€ 2,50', numericPrice: 2.50 },
+                    { name: 'Caffè Brasiliano', price: '€ 3,00', numericPrice: 3.00 },
+                    { name: 'Caffè Marocchino', price: '€ 3,00', numericPrice: 3.00 },
+                    { name: 'Caffè Shakerato', price: '€ 3,00', numericPrice: 3.00 },
+                    { name: 'Caffè Kinder', price: '€ 4,50', numericPrice: 4.50, recommended: true },
+                    { name: 'Caffè al Tiramisù', price: '€ 4,50', numericPrice: 4.50, recommended: true },
+                    { name: 'Caffè Pan di Stelle', price: '€ 4,50', numericPrice: 4.50 },
+                    { name: 'Caffè Oreo', price: '€ 4,50', numericPrice: 4.50 },
+                    { name: 'Caffè alla Nocciola', price: '€ 3,50', numericPrice: 3.50 },
+                    { name: 'Caffè del Nonno', price: '€ 3,50', numericPrice: 3.50, recommended: true },
+                    { name: 'Cappuccino', price: '€ 2,50', numericPrice: 2.50 },
+                    { name: 'Cappuccino di Soia', price: '€ 3,50', numericPrice: 3.50, vegan: true },
+                    { name: 'Cappuccino Deca', price: '€ 3,50', numericPrice: 3.50 },
+                    { name: 'Cappuccino al Ginseng', price: '€ 3,50', numericPrice: 3.50 },
+                    { name: 'Cappuccino alla Nocciola', price: '€ 3,50', numericPrice: 3.50 }
+                ]
+            },
+            {
+                id: 'breakfast',
+                name: 'Breakfast',
+                icon: '🥐',
+                subtitle: 'Dolci fragranti sfornati ogni mattina',
+                items: [
+                    { name: 'Cornetti', desc: 'Sfoglia, Ischitano, Vegano, Cereali', price: '€ 3,50', numericPrice: 3.50, vegan: true },
+                    { name: 'Brioche', price: '€ 3,00', numericPrice: 3.00 },
+                    { name: 'Pasticciotto Leccese', price: '€ 3,50', numericPrice: 3.50, recommended: true },
+                    { name: 'Conchiglia', price: '€ 2,00', numericPrice: 2.00 },
+                    { name: 'Crêpes', price: '€ 5,00', numericPrice: 5.00, recommended: true },
+                    { name: 'Crostate', price: '€ 3,50', numericPrice: 3.50 },
+                    { name: 'Torta della Nonna', price: '€ 4,00', numericPrice: 4.00 },
+                    { name: 'Muffin alla Nutella', price: '€ 3,50', numericPrice: 3.50 },
+                    { name: 'Mini Muffin', price: '€ 1,50', numericPrice: 1.50 },
+                    { name: 'Donuts', price: '€ 3,50', numericPrice: 3.50 },
+                    { name: 'Torte', price: '€ 5,00', numericPrice: 5.00 }
+                ]
+            },
+            {
+                id: 'drink-basic',
+                name: 'Drink Basic',
+                icon: '🍸',
+                subtitle: 'I grandi classici della mixology internazionale',
+                items: [
+                    { name: 'Aperol Spritz', price: '€ 8,00', numericPrice: 8.00, recommended: true },
+                    { name: 'Campari Spritz', price: '€ 9,00', numericPrice: 9.00 },
+                    { name: 'Hugo Spritz', price: '€ 9,00', numericPrice: 9.00 },
+                    { name: 'Midori Spritz', price: '€ 8,00', numericPrice: 8.00 },
+                    { name: 'Negroni', price: '€ 8,00', numericPrice: 8.00, recommended: true },
+                    { name: 'Negroni Sbagliato', price: '€ 8,00', numericPrice: 8.00 },
+                    { name: 'Americano', price: '€ 8,00', numericPrice: 8.00 },
+                    { name: 'Caipiroska', price: '€ 8,00', numericPrice: 8.00 },
+                    { name: "Tommy's Margarita", price: '€ 8,00', numericPrice: 8.00 },
+                    { name: 'Margarita', price: '€ 8,00', numericPrice: 8.00 },
+                    { name: 'Midori Sour', price: '€ 7,00', numericPrice: 7.00 },
+                    { name: 'Disaronno Sour', price: '€ 7,00', numericPrice: 7.00 },
+                    { name: 'Pornstar Martini', price: '€ 9,00', numericPrice: 9.00, recommended: true },
+                    { name: 'Clover Club', price: '€ 9,00', numericPrice: 9.00 }
+                ]
+            },
+            {
+                id: 'gin',
+                name: 'Gin Componibili',
+                icon: '🌿',
+                subtitle: 'Abbina la tua etichetta preferita alla tonica ideale',
+                items: [
+                    { name: 'Bombay Sapphire', price: '€ 8,00', numericPrice: 8.00 },
+                    { name: 'Bombay Dry', price: '€ 8,00', numericPrice: 8.00 },
+                    { name: 'Bulldog', price: '€ 8,00', numericPrice: 8.00 },
+                    { name: 'Tanqueray', price: '€ 12,00', numericPrice: 12.00 },
+                    { name: 'Colombian', price: '€ 12,00', numericPrice: 12.00 },
+                    { name: 'Malfy Rosa', price: '€ 12,00', numericPrice: 12.00, recommended: true },
+                    { name: 'Malfy Limone', price: '€ 12,00', numericPrice: 12.00 },
+                    { name: 'Malfy Arancia', price: '€ 12,00', numericPrice: 12.00 },
+                    { name: "Hendrick's", price: '€ 12,00', numericPrice: 12.00, recommended: true },
+                    { name: "Hendrick's Neptunia", price: '€ 12,00', numericPrice: 12.00 },
+                    { name: "Hendrick's Lunar", price: '€ 12,00', numericPrice: 12.00 },
+                    { name: 'Roku', price: '€ 12,00', numericPrice: 12.00 },
+                    { name: 'Gin Mare', price: '€ 12,00', numericPrice: 12.00, recommended: true },
+                    { name: 'Portofino', price: '€ 12,00', numericPrice: 12.00 },
+                    { name: 'Gold', price: '€ 12,00', numericPrice: 12.00 },
+                    { name: 'Amuerte', price: '€ 12,00', numericPrice: 12.00 }
+                ]
+            },
+            {
+                id: 'vodka',
+                name: 'Vodka Selection',
+                icon: '❄️',
+                subtitle: 'Distillati puri e versioni aromatizzate premium',
+                items: [
+                    { name: 'Grey Goose', price: '€ 9,00', numericPrice: 9.00, recommended: true },
+                    { name: 'Belvedere', price: '€ 10,00', numericPrice: 10.00, recommended: true },
+                    { name: 'Absolut', price: '€ 8,00', numericPrice: 8.00 },
+                    { name: 'Roberto Cavalli', price: '€ 9,00', numericPrice: 9.00 },
+                    { name: 'Roberto Cavalli Watermelon', price: '€ 9,00', numericPrice: 9.00 },
+                    { name: 'Roberto Cavalli Blueberry', price: '€ 9,00', numericPrice: 9.00 }
+                ]
+            },
+            {
+                id: 'analcolici',
+                name: 'Analcolici',
+                icon: '🍹',
+                subtitle: 'Mocktail freschi, fruttati e 100% alcohol-free',
+                items: [
+                    { name: 'Passionfruit', desc: 'Purea di passion fruit e vaniglia, estratto di ananas, succo di lime, ciuffo di menta, amarena Fabbri', price: '€ 8,00', numericPrice: 8.00, recommended: true, nonAlcoholic: true },
+                    { name: 'Virgin Colada', desc: 'Succo di ananas, polpa di cocco', price: '€ 8,00', numericPrice: 8.00, nonAlcoholic: true },
+                    { name: 'Fruit Punch', desc: "Soda, succo d'arancia, succo di mirtillo, succo d'ananas", price: '€ 8,00', numericPrice: 8.00, nonAlcoholic: true }
+                ]
+            },
+            {
+                id: 'sfizioseria',
+                name: 'Sfizioseria',
+                icon: '🍟',
+                subtitle: 'Proposte calde, fritti della tradizione e taglieri da condividere',
+                items: [
+                    { name: 'Double Stick (4 pz)', price: '€ 6,00', numericPrice: 6.00 },
+                    { name: 'Banditos (5 pz)', price: '€ 6,00', numericPrice: 6.00 },
+                    { name: 'Frittatina Classica', price: '€ 3,00', numericPrice: 3.00, recommended: true },
+                    { name: 'Crocchè', price: '€ 2,50', numericPrice: 2.50 },
+                    { name: 'Trancio di Pizza Farcito', price: '€ 3,50', numericPrice: 3.50 },
+                    { name: 'Trancio di Pizza', price: '€ 2,50', numericPrice: 2.50 },
+                    { name: 'Alette di Pollo', price: '€ 5,00', numericPrice: 5.00 },
+                    { name: 'Patatine', desc: 'Con aggiunta a scelta +€ 1,00: würstel, salsiccia, bacon, cheddar, provola, fior di latte, sottiletta', price: '€ 5,50', numericPrice: 5.50 },
+                    { name: 'Hot Dog', price: '€ 4,00', numericPrice: 4.00 },
+                    { name: 'Tagliere Classico', desc: 'Per 2 persone: Salame, Prosciutto Crudo, Formaggi, olive e taralli', price: '€ 15,00', numericPrice: 15.00, recommended: true },
+                    { name: 'Tagliere Sfizioso', desc: 'Per 2 persone: 2 crocchè, 2 frittatine, 2 montanarine, patatine', price: '€ 18,00', numericPrice: 18.00, recommended: true }
+                ]
+            },
+            {
+                id: 'bibite',
+                name: 'Bibite Selection',
+                icon: '🥤',
+                subtitle: 'Soft drink, aperitivi analcolici e spremute fresche',
+                items: [
+                    { name: 'Estathé Pesca / Limone', price: '€ 5,00', numericPrice: 5.00 },
+                    { name: 'Red Bull', price: '€ 5,00', numericPrice: 5.00 },
+                    { name: 'Red Bull Sugar Free', price: '€ 5,00', numericPrice: 5.00 },
+                    { name: 'Red Bull Special Edition', desc: 'Albicocca e fragola / Cocco / Dragon fruit / Anguria', price: '€ 5,00', numericPrice: 5.00 },
+                    { name: 'Coca-Cola / Coca-Cola Zero', price: '€ 5,00', numericPrice: 5.00 },
+                    { name: 'Tassoni', price: '€ 5,00', numericPrice: 5.00 },
+                    { name: 'Schweppes', desc: 'Limone / Arancia / Tonica', price: '€ 5,00', numericPrice: 5.00 },
+                    { name: 'Fanta', price: '€ 5,00', numericPrice: 5.00 },
+                    { name: 'Sprite', price: '€ 5,00', numericPrice: 5.00 },
+                    { name: 'Lemon Soda', price: '€ 5,00', numericPrice: 5.00 },
+                    { name: 'Crodino', price: '€ 5,00', numericPrice: 5.00 },
+                    { name: 'Bitter', price: '€ 5,00', numericPrice: 5.00 },
+                    { name: 'Cocktail Sanpellegrino Rosso', price: '€ 5,00', numericPrice: 5.00 },
+                    { name: 'Cocktail Sanpellegrino Bianco', price: '€ 5,00', numericPrice: 5.00 },
+                    { name: 'Chinotto Neri', price: '€ 5,00', numericPrice: 5.00 },
+                    { name: 'Campari Soda', price: '€ 5,00', numericPrice: 5.00 },
+                    { name: 'Succhi di Frutta', price: '€ 4,00', numericPrice: 4.00 },
+                    { name: "Spremuta d'Arancia", price: '€ 4,50', numericPrice: 4.50 },
+                    { name: 'Spremuta di Melograno', price: '€ 5,50', numericPrice: 5.50 },
+                    { name: 'Aggiunta di Granita', price: '€ 1,00', numericPrice: 1.00 }
+                ]
+            },
+            {
+                id: 'birre',
+                name: 'Birre',
+                icon: '🍺',
+                subtitle: 'Selezione in bottiglia servite ghiacciate',
+                items: [
+                    { name: "Tennent's", price: '€ 4,50', numericPrice: 4.50 },
+                    { name: 'Ichnusa Non Filtrata', price: '€ 5,00', numericPrice: 5.00, recommended: true },
+                    { name: 'Peroni Nastro Azzurro', price: '€ 3,50', numericPrice: 3.50 },
+                    { name: 'Ceres', price: '€ 4,50', numericPrice: 4.50 },
+                    { name: "Beck's", price: '€ 4,50', numericPrice: 4.50 },
+                    { name: 'Corona', price: '€ 4,50', numericPrice: 4.50 },
+                    { name: 'Heineken', price: '€ 4,50', numericPrice: 4.50 }
+                ]
+            },
+            {
+                id: 'champagne',
+                name: 'Champagne e Bollicine',
+                icon: '🥂',
+                subtitle: 'Cuvée prestigiose e Franciacorta per i tuoi brindisi',
+                items: [
+                    { name: 'Moët & Chandon', price: '€ 65,00', numericPrice: 65.00 },
+                    { name: 'Moët Ice Impérial', price: '€ 120,00', numericPrice: 120.00, recommended: true },
+                    { name: "Ca' del Bosco", price: '€ 70,00', numericPrice: 70.00, recommended: true },
+                    { name: 'Veuve Clicquot', price: '€ 70,00', numericPrice: 70.00 }
+                ]
+            },
+            {
+                id: 'distillati',
+                name: 'Distillati & Amari',
+                icon: '🥃',
+                subtitle: 'Rum, Cognac, Grappa, Amari e Whiskey',
+                items: [
+                    // RUM
+                    { name: 'Zacapa XO', subGroup: 'Rum', price: '€ 20,00', numericPrice: 20.00, recommended: true },
+                    { name: 'Diplomático', subGroup: 'Rum', price: '€ 8,00', numericPrice: 8.00 },
+                    { name: 'Havana Club', subGroup: 'Rum', price: '€ 6,00', numericPrice: 6.00 },
+                    { name: 'Havana Club Especial', subGroup: 'Rum', price: '€ 6,00', numericPrice: 6.00 },
+                    // COGNAC
+                    { name: 'Carlos I Gran Reserva', subGroup: 'Cognac', price: '€ 7,00', numericPrice: 7.00 },
+                    { name: 'Courvoisier', subGroup: 'Cognac', price: '€ 7,00', numericPrice: 7.00 },
+                    { name: 'Hennessy', subGroup: 'Cognac', price: '€ 7,00', numericPrice: 7.00 },
+                    // GRAPPA
+                    { name: 'Grappa 903 Barrique', subGroup: 'Grappa', price: '€ 4,00', numericPrice: 4.00 },
+                    { name: "Grappa Vite d'Oro Barrique", subGroup: 'Grappa', price: '€ 4,00', numericPrice: 4.00 },
+                    { name: 'Grappa Lucano Bianca', subGroup: 'Grappa', price: '€ 3,50', numericPrice: 3.50 },
+                    // AMARI
+                    { name: 'Amaro del Capo', subGroup: 'Amari', price: '€ 5,00', numericPrice: 5.00 },
+                    { name: 'Jägermeister', subGroup: 'Amari', price: '€ 5,00', numericPrice: 5.00 },
+                    { name: 'Jefferson', subGroup: 'Amari', price: '€ 6,00', numericPrice: 6.00, recommended: true },
+                    { name: 'Montenegro', subGroup: 'Amari', price: '€ 5,00', numericPrice: 5.00 },
+                    { name: 'Unicum', subGroup: 'Amari', price: '€ 5,00', numericPrice: 5.00 },
+                    { name: 'Fernet-Branca', subGroup: 'Amari', price: '€ 5,00', numericPrice: 5.00 },
+                    { name: 'Fernet-Branca Menta', subGroup: 'Amari', price: '€ 5,00', numericPrice: 5.00 },
+                    { name: 'Amaro Lucano', subGroup: 'Amari', price: '€ 5,00', numericPrice: 5.00 },
+                    { name: 'Tosolini', subGroup: 'Amari', price: '€ 5,00', numericPrice: 5.00 },
+                    { name: 'Averna', subGroup: 'Amari', price: '€ 5,00', numericPrice: 5.00 },
+                    // WHISKEY
+                    { name: "Jack Daniel's", subGroup: 'Whiskey', price: '€ 7,00', numericPrice: 7.00 },
+                    { name: 'Johnnie Walker Red Label', subGroup: 'Whiskey', price: '€ 7,00', numericPrice: 7.00 },
+                    { name: 'Johnnie Walker Black Label', subGroup: 'Whiskey', price: '€ 7,00', numericPrice: 7.00 },
+                    { name: 'Chivas Regal', subGroup: 'Whiskey', price: '€ 6,00', numericPrice: 6.00 },
+                    { name: 'Jim Beam', subGroup: 'Whiskey', price: '€ 5,00', numericPrice: 5.00 },
+                    { name: 'J&B', subGroup: 'Whiskey', price: '€ 5,00', numericPrice: 5.00 },
+                    { name: 'Cutty Sark', subGroup: 'Whiskey', price: '€ 6,00', numericPrice: 6.00 },
+                    { name: 'Jameson', subGroup: 'Whiskey', price: '€ 6,00', numericPrice: 6.00 }
+                ]
+            }
+        ];
+
+        // Stato dell'applicazione
+        let activeCategory = 'all';
+        let activeDietary = 'all';
+        let searchQuery = '';
+
+        // Navigazione tra Cover Iniziale e Menù
+        function openMenu() {
+            const cover = document.getElementById('cover-view');
+            const menu = document.getElementById('menu-view');
+            
+            cover.classList.add('opacity-0', 'scale-95');
+            setTimeout(() => {
+                cover.style.display = 'none';
+                menu.style.display = 'block';
+                window.scrollTo({ top: 0, behavior: 'instant' });
+                requestAnimationFrame(() => {
+                    menu.classList.remove('opacity-0');
+                });
+            }, 300);
+        }
+
+        function closeMenu() {
+            const cover = document.getElementById('cover-view');
+            const menu = document.getElementById('menu-view');
+            
+            menu.classList.add('opacity-0');
+            setTimeout(() => {
+                menu.style.display = 'none';
+                cover.style.display = 'flex';
+                window.scrollTo({ top: 0, behavior: 'instant' });
+                requestAnimationFrame(() => {
+                    cover.classList.remove('opacity-0', 'scale-95');
+                });
+            }, 280);
+        }
+
+        // Copia social handle senza alert()
+        function copySocial(handle) {
+            const tempInput = document.createElement('input');
+            tempInput.value = handle;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            try {
+                document.execCommand('copy');
+                showToast(`Handle ${handle} copiato!`);
+            } catch (err) {
+                showToast(handle);
+            }
+            document.body.removeChild(tempInput);
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast-notification');
+            const toastMsg = document.getElementById('toast-message');
+            toastMsg.textContent = msg;
+            toast.classList.remove('opacity-0');
+            clearTimeout(window.toastTimer);
+            window.toastTimer = setTimeout(() => {
+                toast.classList.add('opacity-0');
+            }, 2200);
+        }
+
+        // Rendering tab categorie
+        function renderCategoryTabs() {
+            const container = document.getElementById('category-tabs');
+            let html = `
+                <button onclick="setCategory('all')" class="cat-tab shrink-0 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                    activeCategory === 'all'
+                        ? 'bg-gold/15 text-gold-bright border border-gold/60'
+                        : 'bg-card/80 text-warmgrey border border-transparent hover:text-ivory'
+                }">
+                    Tutte
+                </button>
+            `;
+
+            MENU_CATEGORIES.forEach(cat => {
+                const isActive = activeCategory === cat.id;
+                html += `
+                    <button onclick="setCategory('${cat.id}')" class="cat-tab shrink-0 px-3.5 py-2 rounded-xl text-xs font-medium transition-all cursor-pointer flex items-center gap-1.5 ${
+                        isActive
+                            ? 'bg-gold/15 text-gold-bright border border-gold/60 font-semibold'
+                            : 'bg-card/80 text-ivory/85 border border-transparent hover:text-gold-bright'
+                    }">
+                        <span>${cat.icon}</span>
+                        <span>${cat.name}</span>
+                    </button>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        function setCategory(catId) {
+            activeCategory = catId;
+            renderCategoryTabs();
+            renderMenu();
+            if (catId !== 'all') {
+                const sectionEl = document.getElementById(`sec-${catId}`);
+                if (sectionEl) {
+                    const yOffset = -155;
+                    const y = sectionEl.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                    window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+                }
+            } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function setDietaryFilter(filter) {
+            activeDietary = filter;
+            document.querySelectorAll('.diet-pill').forEach(btn => {
+                const isMatch = btn.dataset.filter === filter;
+                if (isMatch) {
+                    btn.className = 'diet-pill active shrink-0 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer bg-gold-bright text-obsidian shadow-sm flex items-center gap-1.5';
+                } else {
+                    btn.className = 'diet-pill shrink-0 px-3.5 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer bg-card text-ivory/90 border border-gold/20 hover:border-gold/50 flex items-center gap-1.5';
+                }
+            });
+            renderMenu();
+        }
+
+        function handleSearch(val) {
+            searchQuery = val.trim().toLowerCase();
+            const clearBtn = document.getElementById('clear-search-btn');
+            if (searchQuery.length > 0) {
+                clearBtn.classList.remove('hidden');
+            } else {
+                clearBtn.classList.add('hidden');
+            }
+            renderMenu();
+        }
+
+        function clearSearch() {
+            const input = document.getElementById('search-input');
+            input.value = '';
+            handleSearch('');
+        }
+
+        function resetAllFilters() {
+            activeCategory = 'all';
+            activeDietary = 'all';
+            clearSearch();
+            setDietaryFilter('all');
+            renderCategoryTabs();
+            renderMenu();
+        }
+
+        // Rendering principale del menù
+        function renderMenu() {
+            const container = document.getElementById('menu-content');
+            const emptyState = document.getElementById('empty-state');
+            let html = '';
+            let totalVisibleItems = 0;
+
+            MENU_CATEGORIES.forEach(category => {
+                if (activeCategory !== 'all' && activeCategory !== category.id) {
+                    return;
+                }
+
+                const filteredItems = category.items.filter(item => {
+                    if (activeDietary === 'recommended' && !item.recommended) return false;
+                    if (activeDietary === 'vegan' && !item.vegan) return false;
+                    if (activeDietary === 'nonalcoholic' && !item.nonAlcoholic) return false;
+
+                    if (searchQuery) {
+                        const inName = item.name.toLowerCase().includes(searchQuery);
+                        const inDesc = item.desc ? item.desc.toLowerCase().includes(searchQuery) : false;
+                        const inSub = item.subGroup ? item.subGroup.toLowerCase().includes(searchQuery) : false;
+                        const inCat = category.name.toLowerCase().includes(searchQuery);
+                        if (!inName && !inDesc && !inSub && !inCat) return false;
+                    }
+
+                    return true;
+                });
+
+                if (filteredItems.length === 0) return;
+                totalVisibleItems += filteredItems.length;
+
+                html += `
+                    <section id="sec-${category.id}" class="animate-fade-up scroll-mt-40">
+                        <div class="flex items-center gap-3 pb-3 mb-4 border-b border-gold/25">
+                            <div class="w-10 h-10 rounded-xl bg-card border border-gold/30 flex items-center justify-center text-lg shrink-0 shadow-sm">
+                                ${category.icon}
+                            </div>
+                            <div class="min-w-0 flex-1">
+                                <h3 class="font-serif text-2xl sm:text-[26px] font-semibold text-ivory leading-tight tracking-wide">
+                                    ${category.name}
+                                </h3>
+                                ${category.subtitle ? `<p class="text-xs text-warmgrey truncate">${category.subtitle}</p>` : ''}
+                            </div>
+                        </div>
+                        <div class="space-y-2.5">
+                `;
+
+                let currentSubGroup = null;
+
+                filteredItems.forEach(item => {
+                    if (item.subGroup && item.subGroup !== currentSubGroup) {
+                        currentSubGroup = item.subGroup;
+                        html += `
+                            <div class="pt-3 pb-1 flex items-center gap-2.5">
+                                <span class="text-xs font-cinzel font-semibold tracking-[0.18em] text-gold-bright uppercase">${currentSubGroup}</span>
+                                <span class="h-[1px] flex-1 bg-gold/20"></span>
+                            </div>
+                        `;
+                    }
+
+                    html += `
+                        <div class="group rounded-2xl bg-card hover:bg-cardHover border border-gold/20 hover:border-gold/50 p-3.5 sm:p-4 transition-all duration-200 flex items-center justify-between gap-4">
+                            <div class="min-w-0 flex-1">
+                                <div class="flex flex-wrap items-center gap-2">
+                                    <h4 class="font-medium text-[15px] sm:text-base text-ivory leading-snug">
+                                        ${item.name}
+                                    </h4>
+                                    ${item.recommended ? `
+                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-gold/15 text-gold-bright border border-gold/30">
+                                            ★ Consigliato
+                                        </span>
+                                    ` : ''}
+                                    ${item.vegan ? `
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">
+                                            Vegano
+                                        </span>
+                                    ` : ''}
+                                    ${item.nonAlcoholic ? `
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-sky-500/10 text-sky-300 border border-sky-500/20">
+                                            Analcolico
+                                        </span>
+                                    ` : ''}
+                                </div>
+                                ${item.desc ? `
+                                    <p class="text-xs text-warmgrey mt-1 leading-relaxed">
+                                        ${item.desc}
+                                    </p>
+                                ` : ''}
+                            </div>
+
+                            <!-- Prezzo invariato allineato a destra -->
+                            <div class="shrink-0">
+                                <span class="font-semibold text-sm sm:text-[15px] text-gold-bright whitespace-nowrap tracking-wide">
+                                    ${item.price}
+                                </span>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                html += `</div></section>`;
+            });
+
+            if (totalVisibleItems === 0) {
+                container.innerHTML = '';
+                emptyState.classList.remove('hidden');
+            } else {
+                emptyState.classList.add('hidden');
+                container.innerHTML = html;
+            }
+        }
+
+        // Inizializzazione al caricamento: garantisce che sia visibile SOLO la Pagina Iniziale (Cover)
+        document.addEventListener('DOMContentLoaded', () => {
+            const cover = document.getElementById('cover-view');
+            const menu = document.getElementById('menu-view');
+            cover.style.display = 'flex';
+            menu.style.display = 'none';
+            
+            renderCategoryTabs();
+            renderMenu();
+        });
+    </script>
+</body>
+</html>
